@@ -15,6 +15,8 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.14" />
   </ItemGroup>
 
   <ItemGroup>
@@ -24,9 +26,11 @@
   <ItemGroup>
     <None Remove="Extensions\" />
     <None Remove="Middleware\" />
+    <None Remove="Services\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="Middleware\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>
