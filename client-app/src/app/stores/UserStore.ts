@@ -45,4 +45,10 @@ export default class UserStore {
         router.navigate('/activities');
         store.modalStore.closeModal();
     }
+
+    setImage = (image: string) => {
+        if(this.user){
+            this.user.image = image;
+        }
+    }
 }
