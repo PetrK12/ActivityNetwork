@@ -1,9 +1,9 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { Activity } from '../models/activity';
+import { ActivityFormValues, IActivity } from '../models/activity';
 import { toast } from 'react-toastify';
 import { router } from '../router/Routes';
 import { store } from '../stores/store';
-import { User, UserFormValues } from '../models/user';
+import { IUser, IUserFormValues } from '../models/user';
 
 const sleep = (delay: number) => {
     return new Promise((resolve)=> {
@@ -71,17 +71,18 @@ const request = {
 }
 
 const Activities = {
-    list: () => request.get<Activity[]>('/activity'),
-    details: (id: string) => request.get<Activity>(`/activity/${id}`),
-    create: (activity: Activity) => request.post<void>('/activity', activity),
-    update: (activity: Activity) => request.put<void>(`/activity/${activity.id}`, activity),
-    delete: (id: string) => request.delete<void>(`/activity/${id}`)
+    list: () => request.get<IActivity[]>('/activity'),
+    details: (id: string) => request.get<IActivity>(`/activity/${id}`),
+    create: (activity: ActivityFormValues) => request.post<void>('/activity', activity),
+    update: (activity: ActivityFormValues) => request.put<void>(`/activity/${activity.id}`, activity),
+    delete: (id: string) => request.delete<void>(`/activity/${id}`),
+    attend: (id: string) => request.post<void>(`activity/${id}/attend`, {})
 }
 
 const Account = {
-    current: () => request.get<User>('/account'),
-    login: (user: UserFormValues) => request.post<User>('/account/login', user),
-    register: (user: UserFormValues) => request.post<User>('/account/register', user)
+    current: () => request.get<IUser>('/account'),
+    login: (user: IUserFormValues) => request.post<IUser>('/account/login', user),
+    register: (user: IUserFormValues) => request.post<IUser>('/account/register', user)
 }
 
 const agent = {

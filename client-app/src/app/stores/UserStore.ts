@@ -1,11 +1,11 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { User, UserFormValues } from "../models/user";
+import { IUser, IUserFormValues } from "../models/user";
 import agent from "../api/agent";
 import { store } from "./store";
 import { router } from "../router/Routes";
 
 export default class UserStore {
-    user: User | null = null
+    user: IUser | null = null
 
     constructor() {
         makeAutoObservable(this)
@@ -15,7 +15,7 @@ export default class UserStore {
         return !! this.user;
     }
 
-    login = async (creds: UserFormValues) => {
+    login = async (creds: IUserFormValues) => {
         const user = await agent.Account.login(creds);
         store.commonStore.setToken(user.token);
         runInAction(() => this.user = user);
@@ -38,7 +38,7 @@ export default class UserStore {
         }
     }
 
-    register = async (creds: UserFormValues) => {
+    register = async (creds: IUserFormValues) => {
         const user = await agent.Account.register(creds);
         store.commonStore.setToken(user.token);
         runInAction(() => this.user = user);

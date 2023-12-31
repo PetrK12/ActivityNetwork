@@ -1,11 +1,11 @@
-export interface User {
-    username: string;
+export interface IUser {
+    userName: string;
     displayName: string;
     token: string;
     image?: string;
 }
 
-export interface UserFormValues{
+export interface IUserFormValues{
     email: string;
     password: string;
     displayName?: string;

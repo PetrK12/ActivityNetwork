@@ -1,8 +1,8 @@
 import { makeAutoObservable, reaction } from "mobx";
-import { ServerError } from "../models/ServerError";
+import { IServerError } from "../models/ServerError";
 
 export default class CommonStore {
-    error: ServerError | null = null;
+    error: IServerError | null = null;
     token: string | null = localStorage.getItem('jwt');
     appLoaded: boolean = false;
 
@@ -21,7 +21,7 @@ export default class CommonStore {
         )
     }
 
-    setServerError(error: ServerError){
+    setServerError(error: IServerError){
         this.error = error;
     }
 
