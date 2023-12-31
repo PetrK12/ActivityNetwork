@@ -1,4 +1,5 @@
 ﻿using System;
+using Application.Activities.DataTransferObject;
 using Application.Core;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;

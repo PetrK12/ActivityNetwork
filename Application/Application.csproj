@@ -16,12 +16,16 @@
     <None Remove="Core\" />
     <None Remove="Interfaces\" />
     <None Remove="Profiles\" />
+    <None Remove="Photos\" />
+    <None Remove="Activities\DataTransferObject\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Activities\" />
     <Folder Include="Core\" />
     <Folder Include="Interfaces\" />
     <Folder Include="Profiles\" />
+    <Folder Include="Photos\" />
+    <Folder Include="Activities\DataTransferObject\" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>

@@ -1,7 +1,7 @@
 ﻿using System;
 using Application.Profiles;
 
-namespace Application.Activities
+namespace Application.Activities.DataTransferObject
 {
     public class ActivityDto
     {
@@ -14,7 +14,7 @@ namespace Application.Activities
         public string? Venue { get; set; }
         public string HostUsername { get; set; }
         public bool IsCancelled { get; set; }
-        public ICollection<Profile> Attendees { get; set; }
+        public ICollection<AttendeeDto> Attendees { get; set; }
     }
 }
 
