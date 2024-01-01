@@ -19,6 +19,7 @@
     <None Remove="Photos\" />
     <None Remove="Activities\DataTransferObject\" />
     <None Remove="Comments\" />
+    <None Remove="Followers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Activities\" />
@@ -28,6 +29,7 @@
     <Folder Include="Photos\" />
     <Folder Include="Activities\DataTransferObject\" />
     <Folder Include="Comments\" />
+    <Folder Include="Followers\" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
