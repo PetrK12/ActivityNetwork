@@ -1,11 +1,11 @@
 import { makeAutoObservable, runInAction } from "mobx";
-import { Profile } from "../models/profile";
+import { IProfile, Profile } from "../models/profile";
 import agent from "../api/agent";
 import { store } from "./store";
 import { IPhoto } from "../models/photo";
 
 export default class ProfileStore {
-    profile: Profile | null = null;
+    profile: IProfile | null = null;
     loadingProfile: boolean = false;
     uploading: boolean = false;
     loading: boolean = false;
@@ -88,6 +88,24 @@ export default class ProfileStore {
         } catch (error) {
             console.log(error);
             runInAction(() => this.loading = false);
+        }
+    }
+
+    updateProfile = async (profile: Partial<IProfile>) => {
+        this.loading = true
+        try {
+            await agent.Profiles.updateProfile(profile);
+            runInAction(() => {
+                if (profile.displayName && profile.displayName !==
+                    store.userStore.user?.displayName) {
+                    store.userStore.setDisplayName(profile.displayName);
+                }
+                this.profile = {...this.profile, ...profile as Profile};
+                this.loading = false;
+            })
+        } catch (error) {
+            runInAction(() => this.loading = false);
+            console.log(error);
         }
     }
 }
