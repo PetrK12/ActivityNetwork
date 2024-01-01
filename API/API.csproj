@@ -28,10 +28,12 @@
     <None Remove="Extensions\" />
     <None Remove="Middleware\" />
     <None Remove="Services\" />
+    <None Remove="SignalR\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\" />
     <Folder Include="Middleware\" />
     <Folder Include="Services\" />
+    <Folder Include="SignalR\" />
   </ItemGroup>
 </Project>
