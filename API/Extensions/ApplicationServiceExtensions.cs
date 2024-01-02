@@ -50,8 +50,8 @@ namespace API.Extensions
                         SslMode = SslMode.Require,
                         TrustServerCertificate = true
                     };
-                    connStr = builder.ToString();
-                    /*
+                    //connStr = builder.ToString();
+                    
                     // Parse connection URL to connection string for Npgsql
                     connUrl = connUrl.Replace("postgres://", string.Empty);
                     var pgUserPass = connUrl.Split("@")[0];
@@ -64,7 +64,9 @@ namespace API.Extensions
                     var pgPort = pgHostPort.Split(":")[1];
 
                     connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
-                    */
+
+                    Console.WriteLine("Debug connStr" + connStr);
+                    Console.WriteLine("Debug enviroment" + connUrl);
                 }
 
                 // Whether the connection string came from the local development configuration file
