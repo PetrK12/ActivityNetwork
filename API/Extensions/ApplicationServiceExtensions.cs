@@ -8,6 +8,7 @@ using FluentValidation.AspNetCore;
 using Infrastructure.Photos;
 using Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using Persistance;
 
 namespace API.Extensions
@@ -37,7 +38,20 @@ namespace API.Extensions
                 {
                     // Use connection string provided at runtime by FlyIO.
                     var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-
+                    var databaseUri = new Uri(connUrl);
+                    var userInfo = databaseUri.UserInfo.Split(':');
+                    var builder = new NpgsqlConnectionStringBuilder
+                    {
+                        Host = databaseUri.Host,
+                        Port = databaseUri.Port,
+                        Username = userInfo[0],
+                        Password = userInfo[1],
+                        Database = databaseUri.LocalPath.TrimStart('/'),
+                        SslMode = SslMode.Require,
+                        TrustServerCertificate = true
+                    };
+                    connStr = builder.ToString();
+                    /*
                     // Parse connection URL to connection string for Npgsql
                     connUrl = connUrl.Replace("postgres://", string.Empty);
                     var pgUserPass = connUrl.Split("@")[0];
@@ -50,6 +64,7 @@ namespace API.Extensions
                     var pgPort = pgHostPort.Split(":")[1];
 
                     connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
+                    */
                 }
 
                 // Whether the connection string came from the local development configuration file
