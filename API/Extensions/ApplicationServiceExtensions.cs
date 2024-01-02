@@ -38,20 +38,7 @@ namespace API.Extensions
                 {
                     // Use connection string provided at runtime by FlyIO.
                     var connUrl = Environment.GetEnvironmentVariable("DATABASE_URL");
-                    var databaseUri = new Uri(connUrl);
-                    var userInfo = databaseUri.UserInfo.Split(':');
-                    var builder = new NpgsqlConnectionStringBuilder
-                    {
-                        Host = databaseUri.Host,
-                        Port = databaseUri.Port,
-                        Username = userInfo[0],
-                        Password = userInfo[1],
-                        Database = databaseUri.LocalPath.TrimStart('/'),
-                        SslMode = SslMode.Require,
-                        TrustServerCertificate = true
-                    };
-                    //connStr = builder.ToString();
-                    
+
                     // Parse connection URL to connection string for Npgsql
                     connUrl = connUrl.Replace("postgres://", string.Empty);
                     var pgUserPass = connUrl.Split("@")[0];
@@ -62,17 +49,14 @@ namespace API.Extensions
                     var pgPass = pgUserPass.Split(":")[1];
                     var pgHost = pgHostPort.Split(":")[0];
                     var pgPort = pgHostPort.Split(":")[1];
+                    var updatedHost = pgHost.Replace("flycast", "internal");
 
-                    connStr = $"Server={pgHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
-
-                    Console.WriteLine("Debug connStr" + connStr);
-                    Console.WriteLine("Debug enviroment" + connUrl);
+                    connStr = $"Server={updatedHost};Port={pgPort};User Id={pgUser};Password={pgPass};Database={pgDb};";
                 }
 
                 // Whether the connection string came from the local development configuration file
                 // or from the environment variable from FlyIO, use it to set up your DbContext.
                 options.UseNpgsql(connStr);
-                System.Console.WriteLine(connStr);
             });
 
             services.AddCors(ops => {
